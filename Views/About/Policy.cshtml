@@ -1,0 +1,53 @@
+﻿@using VinaOfficeWebsite.Models.ViewModel;
+@using VinaOfficeWebsite.Repository;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AboutViewModel data = ViewBag.Data;
+}
+@section SliderBanner {
+    <div class="banner-lg block-bg banner-page"
+         style="background-image: url('/css/skin/banner/Banner.png')">
+        <div class="container d-flex align-items-center h-100">
+            <div class="text-banner">
+                <nav arial-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ" alt="Trang chủ" target="_self">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a href="" title="Trang chủ" alt="Trang chủ" target="_self">Chính sách</a>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="tt-md">@Html.Raw(data.Title)</h1>
+            </div>
+        </div>
+    </div>
+}
+
+@section Meta{
+    @Html.Raw(ViewBag.Meta)
+}
+<main class="mainer">
+    <div class="block-bg block-post">
+        <div class="container py-3">
+            <div class="content-master content-noshare">
+                <div class="content-post">
+                    @Html.Raw(data.Content)
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_PartialShared.cshtml" />
+</main>
+
+@section Scripts {
+    <script>
+        var imgs = $('img')
+        imgs.each(function (i, ele) {
+            if (!$(ele).attr('src').includes('vinaoffice.com')) {
+                $(ele).attr('src', 'https://vinaoffice.com' + $(ele).attr('src'))
+            }
+        })
+    </script>
+}

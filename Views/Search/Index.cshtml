@@ -1,0 +1,240 @@
+﻿@using VinaOfficeWebsite.Models.ViewModel;
+@using VinaOfficeWebsite.Repository;
+@inject ICommonRepository _common
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ProductCateViewModel currentCate = ViewBag.CurrentCate;
+
+    List<ProductCateViewModel> categories = ViewBag.Categories;
+    List<ProductViewModel> latestProductList = ViewBag.LatestProductList;
+
+    List<ProductViewModel> list = ViewBag.Data;
+    int currentPage = ViewBag.CurrentPage;
+    int lastpage = ViewBag.PageTotal;
+
+
+    var block = 5;
+    int nextPage = currentPage + 1;
+    int perPage = currentPage - 1;
+    if (perPage == 0)
+    {
+        perPage = 1;
+    }
+    if (nextPage >= lastpage)
+    {
+        nextPage = lastpage;
+    }
+    int tempcurrentPage = currentPage + (currentPage / block);
+    int currentBlock = currentPage / block;
+    int startPage = 0;
+    int endPage = 0;
+
+
+    if (currentBlock == 0)
+    {
+        startPage = 1;
+        endPage = block;
+    }
+    else
+    {
+        endPage = block * (currentBlock + 1);
+        startPage = endPage - block;
+    }
+    if (endPage > lastpage)
+    {
+        endPage = lastpage;
+    }
+    var url = Context.Request.Host.Value;
+
+}
+@section SliderBanner {
+    <div class="banner-lg block-bg banner-page" style="background-image: url('/css/skin/banner/Banner.png')">
+        <div class="container d-flex align-items-center h-100">
+            <div class="text-banner">
+                <nav arial-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ" alt="Trang chủ" target="_self">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/tim-kiem/" title="Tìm kiếm" alt="Tìm kiếm" target="_self">Tìm kiếm</a>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="tt-md">Kết quả tìm kiếm với từ khóa "@Html.Raw(ViewBag.Key)"</h1>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Meta{
+    @Html.Raw(ViewBag.Meta)
+}
+
+<main class="mainer">
+    <div class="block-bg">
+        <div class="container py-3">
+            <div class="block-sidebar" data-wrapper>
+                <div class="mainbody mb-4 mb-md-0 order-md-2" data-mainbody>
+                    @if (list.Any())
+                    {
+                        <div class="list-products row row-cols-2 row-cols-lg-3 row-cols-xl-4 my-3">
+                            @foreach (var item in list)
+                            {
+                                <div class="col">
+                                    <div class="block">
+                                        <div class="thumb-res square">
+                                            @* <div class="list-badge">
+                                    <div class="badge new">Mới</div>
+                                    </div>*@
+                                            <img src="@Html.Raw(item.PicThumb)"
+                                                 alt="@Html.Raw(item.PicThumb)"
+                                                 title="@Html.Raw(item.Title)" />
+                                            @if (item.Price != 0)
+                                            {
+                                                <div class="text-hover">
+                                                    <a onclick="addToCart(@item.Id)" class="btn btn-primary btn-buy" alt="Mua hàng" title="Mua hàng">
+                                                        Mua hàng<i class="far fa-shopping-bag ml-2"></i>
+                                                    </a>
+                                                </div>
+                                            }
+                                            <div class="list-icon-social">
+                                                <a class="btn rounded-circle btn-facebook" alt="facebook" title="facebook" href="https://www.facebook.com/sharer/sharer.php?u=@Html.Raw(url + "/chi-tiet-" + item.Slug + ".html")" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </a>
+                                                <a class="btn rounded-circle btn-twitter" alt="twitter" title="twitter" href="https://twitter.com/intent/tweet?original_referer=@Html.Raw(url + "/chi-tiet-" + item.Slug + ".html")&amp;via=" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                                    <i class="fab fa-twitter"></i>
+                                                </a>
+                                                <a class="btn rounded-circle btn-pinterest" alt="pinterest" title="pinterest" href="https://www.pinterest.com/pin/create/button/?url=@Html.Raw(url + "/chi-tiet-" + item.Slug + ".html")" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                                    <i class="fab fa-pinterest"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <a class="absolute"
+                                               alt="@Html.Raw(item.Title)"
+                                               title="@Html.Raw(item.Title)"
+                                               href="/chi-tiet-@(item.Slug).html"></a>
+                                            <div class="tt">@Html.Raw(item.Title)</div>
+                                            @if (item.Price != 0)
+                                            {
+                                                <div class="price">
+                                                    @Html.Raw(item.PriceString)<sup><u>đ</u></sup>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="price">
+                                                    <a href="/lien-he/" class="btn btn-primary btn-buy" alt="Liên hệ" title="Liên hệ">Liên hệ</a>
+                                                </div>
+                                            }
+                                        </div>
+                                        @if (item.Price != 0)
+                                        {
+                                            <div class="block d-lg-none">
+                                                <a onclick="addToCart(@item.Id)" class="btn btn-primary btn-buy" alt="Mua hàng" title="Mua hàng">
+                                                    Mua hàng<i class="far fa-shopping-bag ml-2"></i>
+                                                </a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <nav class="pagination justify-content-end">
+                            <div class="page-item prev disabled">
+                                <a class="prev-page" href="@(currentPage == 1 ? "javascript:void(0)" : "?page=" + (currentPage - 1))" title="prev" alt="prev" target="_self"><i class="fa fa-angle-left"></i></a>
+                            </div>
+
+                            @for (int i = startPage; i <= endPage; i++)
+                            {
+                                <div class="page-item @(currentPage == i ? "active" : "")">
+                                    <a class="page-counter" alt="@i" title="@i" href="?page=@i">
+                                        @i
+                                    </a>
+                                </div>
+                            }
+
+                            @if (currentPage < lastpage - block)
+                            {
+                                <div class="page-item">
+                                    <a class="page-counter" alt="..." title="..." href="#">
+                                        ...
+                                    </a>
+                                </div>
+                                <div class="page-item active">
+                                    <a class="page-counter" alt="@lastpage" title="@lastpage" href="?page=@lastpage">
+                                        @lastpage
+                                    </a>
+                                </div>
+                            }
+                            <div class="page-item next">
+                                <a class="next-page" href="@(currentPage == lastpage ? "javascript:void(0)" : "?page="  + (currentPage + 1))" title="next" alt="next" target="_self">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </nav>
+                    }
+                    else
+                    {
+                        <div class="text-center">Không có kết quả tìm kiếm!!!</div>
+                    }
+                </div>
+                <div class="sidebar order-md-1" data-sidebar>
+                    <div data-stick data-width-fill>
+                        <div class="pane pane-menu mb-4">
+                            <div class="tt-xs text-uppercase tt-icon">Danh mục</div>
+                            <ul class="menu-vertical">
+                                @foreach (var item in categories)
+                                {
+                                    <li>
+                                        <a href="/@Html.Raw(item.Slug)/" title="@Html.Raw(item.Title)" alt="@Html.Raw(item.Title)" target="_self">@Html.Raw(item.Title)</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="pane pane-list pane-list-products">
+                            <div class="tt-xs text-uppercase tt-icon">SẢN PHẨM MỚI</div>
+                            <div class="list-products">
+                                @foreach (var item in latestProductList)
+                                {
+                                    <div class="pane-list-item d-flex block">
+                                        <a class="absolute"
+                                           href="/chi-tiet-@(item.Slug).html"
+                                           title="@Html.Raw(item.Title)"
+                                           alt="@Html.Raw(item.Title)"
+                                           target="_self"></a>
+                                        <div class="thumb">
+                                            <img class="fit-cover"
+                                                 src="@Html.Raw(item.PicThumb)"
+                                                 alt="@Html.Raw(item.PicThumb)" />
+                                        </div>
+                                        <div class="info">
+                                            <div class="tt">
+                                                @Html.Raw(item.Title)
+                                            </div>
+                                            @if (item.Price != 0)
+                                            {
+                                                <div class="price">
+                                                    @Html.Raw(item.PriceString)<sup><u>đ</u></sup>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="price">Liên hệ</div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_PartialShared.cshtml" />
+</main>

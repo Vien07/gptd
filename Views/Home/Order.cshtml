@@ -1,0 +1,197 @@
+﻿@using VinaOfficeWebsite.Models.ViewModel;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Meta{
+    @Html.Raw(ViewBag.Meta)
+}
+
+@section SliderBanner {
+    <div class="banner-lg block-bg banner-page"
+         style="background-image: url('/css/skin/banner/Banner.png')">
+        <div class="container d-flex align-items-center h-100">
+            <div class="text-banner">
+                <nav arial-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ" alt="Trang chủ" target="_self">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a href="/dat-hang/" title="Đặt hàng" alt="Đặt hàng" target="_self">Đặt hàng</a>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="tt-md">Đặt hàng</h1>
+            </div>
+        </div>
+    </div>
+}
+
+<main class="mainer">
+    <div class="block-bg block-post">
+        <div class="container py-3">
+            <div class="row my-4 g-3">
+                <div class="col-12 col-lg-6 order-lg-2">
+                    <div class="block-bg block-order">
+                        <h4 class="tt tt-icon">Đơn hàng</h4>
+                        <div class="bag-order">
+                            <div class="order-item order-header">
+                                <div class="order-info">
+                                    Tên sản phẩm
+                                </div>
+                                <div class="order-count">
+                                    Số lượng
+                                </div>
+                            </div>
+                            <div class="items_b"></div>
+                        </div>
+                        <div class="count-total">
+                            <div class="d-flex align-items-end justify-content-end">
+                                <span class="txt-desc mr-2">Tổng thanh toán: </span><span class="price fw-medium txt-price fs-24 totalPrice"></span>
+                            </div>
+                            <div class="text-right">(Giá trên chưa tính phí vận chuyển và VAT)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 order-lg-1">
+                    <h3 class="tt-icon tt-md">Thông tin khách hàng</h3>
+                    <form id="frmOrder" class="form-validate material-form form-order">
+                        <div class="row g-2 gx-3">
+                            <div class="col-12">
+                                <span class="text-no">Thông tin người nhận</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="FullName" required="">
+                                    <label class="label-text">Tên của bạn(*)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="email" name="Email">
+                                    <label class="label-text">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" pattern="/(84|0[3|5|7|8|9])+([0-9]{8})\b/" name="PhoneNumber" required type="text">
+                                    <label class="label-text">Số điện thoại(*)</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <span class="text-no">Địa chỉ nhận hàng</span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select id="City" class="form-select"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select id="District" class="form-select"> </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select id="Ward" class="form-select"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> 
+                                <div class="form-group">
+                                    <input class="form-control" type="text" id="Address">
+                                    <label class="label-text">Số nhà</label>
+                                </div>
+                            </div>
+                            @* <div class="col-md-12">
+                            <div class="form-group">
+                            <div class="form-check">
+                            <input class="form-check-input" id="check1a" type="checkbox">
+                            <label class="form-check-label" for="check1a">Xuất hoá đơn VAT</label>
+                            <div class="form-tax-o">
+                            <div class="form-tax">
+                            <div class="row gx-2">
+                            <div class="col-lg-6">
+                            <div class="form-group">
+                            <input class="form-control" type="text">
+                            <label class="label-text">Tên công ty</label>
+                            </div>
+                            </div>
+                            <div class="col-lg-6">
+                            <div class="form-group">
+                            <input class="form-control" type="text">
+                            <label class="label-text">Địa chỉ công ty</label>
+                            </div>
+                            </div>
+                            <div class="col-12">
+                            <div class="form-group mb-0">
+                            <input class="form-control" type="text">
+                            <label class="label-text">Mã số thuế</label>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>*@
+                            <div class="col-12">
+                                <span class="text-no">Phương thức thanh toán</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group form-group-check">
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="1" id="radio1a" type="radio" name="IsCOD">
+                                        <label class="form-check-label" for="radio1a">Thanh toán lúc nhận hàng (COD)</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="0" id="radio1b" type="radio" name="IsCOD">
+                                        <label class="form-check-label" for="radio1b">Thanh toán trước qua iBanking</label>
+                                        @*  <div class="form-tax-o">
+                                        <div class="form-tax">
+                                        <div class="text-dark mb-2">Thanh toán với hình thức chuyển khoản qua Internet Banking</div>
+                                        <p>Thông tin thanh toán:</p>
+                                        <div class="tt">Chủ TK: NGUYEN VAN A</div>
+                                        <ul class="mb-0">
+                                        <li class="mb-0"><b>Vietcombank:</b> 123456789 - CN: Binh Thanh</li>
+                                        <li class="mb-0"><b>ACB:</b> 123456 - CN: Binh Thanh</li>
+                                        <li class="mb-0"><b>AGRIBANK:</b> 012345678 - CN: Binh Tan</li>
+                                        </ul>
+                                        </div>
+                                        </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <span class="text-no">Ghi chú</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <textarea name="Note" class="form-control" rows="5"></textarea>
+                                    <label class="label-text">Nội dung</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex flex-wrap align-items-center justify-content-end">
+                                    @*<div class="g-recaptcha my-2 mr-3" data-sitekey="6LcbK98UAAAAALQI9rCCE3Vlm5LZtCt_Fdo7V4Wc"></div>*@
+                                    <a class="btn btn-outline-primary mr-2" alt="Tiếp tục mua sắm" title="Tiếp tục mua sắm" href="/san-pham/">Tiếp tục mua sắm</a>
+                                    <a class="btn btn-primary px-4" onclick="saveOrder('frmOrder', this)" alt="Hoàn tất" title="Hoàn tất">Hoàn tất</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_PartialShared.cshtml" />
+</main>
+
+@section Scripts {
+    <script>
+        loadCart();
+        getSelectProvince('City', 'District', 'Ward');
+    </script>
+}

@@ -1,0 +1,272 @@
+﻿@using VinaOfficeWebsite.Repository;
+@inject IAboutRepository _about
+@{
+    var listPolicy = _about.GetPolicyList();
+    var listAbout = _about.GetList();
+}
+<footer class="footer">
+    <div class="container py-3 pb-4 pb-md-3 pt-xl-45">
+        <div class="row">
+            <div class="col-md-6 col-lg-4 footer-info">
+                <div class="footer-col">
+                    <a class="tt-xs tt-icon toggle-link">
+                        Thông tin<i class="far fa-plus"></i>
+                    </a>
+                    <div class="list-toggle">
+                        <div class="picon">
+                            <i class="far fa-map-marker-alt"></i>85 Trần Văn Giàu, Phường Tân Tạo A, Q.Bình Tân, TP.HCM
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-phone fa-flip-horizontal"></i><a href="tel:(+028) 62 660 139 - 62600367 - 625 38 800" title=""
+                                                                              alt=""
+                                                                              target="_self">(+028) 62 660 139 - 62600367 - 625 38 800</a>
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-fax"></i><a href="#" title="" alt="" target="_self">(+028) 626 00 367</a>
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-envelope"></i><a href="mailto:info@vinaoffice.com" title="" alt="" target="_self">info@vinaoffice.com</a>
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-globe"></i><a href="//www.vinaoffice.com" title="vinaoffice.com" alt="vinaoffice.com" target="_self">www.vinaoffice.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (listAbout.Any())
+            {
+                <div class="col-md-6 col-lg-4 footer-menu-list">
+                    <div class="footer-col">
+                        <a class="tt-xs tt-icon toggle-link">
+                            Về chúng tôi<i class="far fa-plus"></i>
+                        </a>
+                        <div class="list-toggle">
+                            <ul class="list-style-angle">
+                                @foreach (var item in listAbout)
+                                {
+                                    <li>
+                                        <a href="/tong-quan/@Html.Raw(item.Slug)/" title="@Html.Raw(item.Title)" alt="@Html.Raw(item.Title)" target="_self">@Html.Raw(item.Title)</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            @if (listPolicy.Any())
+            {
+                <div class="col-md-6 col-lg-4 footer-menu-list">
+                    <div class="footer-col">
+                        <a class="tt-xs tt-icon toggle-link">
+                            Chính sách bảo hành<i class="far fa-plus"></i>
+                        </a>
+                        <div class="list-toggle">
+                            <ul class="list-style-angle">
+                                @foreach(var item in listPolicy)
+                                {
+                                    <li>
+                                        <a href="/chinh-sach/@Html.Raw(item.Slug)/" title="@Html.Raw(item.Title)" alt="@Html.Raw(item.Title)" target="_self">@Html.Raw(item.Title)</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <div class="col-md-6 col-lg-4">
+                <div class="footer-col">
+                    <a class="tt-xs tt-icon toggle-link">
+                        Liên kết<i class="far fa-plus"></i>
+                    </a>
+                    <div class="list-toggle">
+                        <div class="thumb-res wide mb-3 d-md-none">
+                            <iframe src="https://www.youtube.com/embed/KTB3P3AzCOg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                        <div class="thumb-res wide mb-3 d-md-none">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15678.811502423976!2d106.572822!3d10.757367!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752d3fa94285f7%3A0x695c28d26e25b306!2zQ8O0bmcgdHkgc-G6o24geHXhuqV0IGLDoG4gZ2jhur8gdsSDbiBwaMOybmcgVmluYW9mZmljZQ!5e0!3m2!1svi!2sus!4v1683088636185!5m2!1svi!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="media-embed"></div>
+                        <div class="fb-page"
+                             data-href="https://www.facebook.com/vinaofficechair/"
+                             data-width="400"
+                             data-hide-cover="false"
+                             data-show-facepile="true">
+                            <blockquote class="fb-xfbml-parse-ignore"
+                                        cite="https://www.facebook.com/vinaofficechair/">
+                                <a href="https://www.facebook.com/vinaofficechair/">Vinaoffice</a>
+                            </blockquote>
+                        </div>
+                        <div class="list-icon-social mb-3 mt-2">
+                            <a class="btn rounded-circle btn-youtube" href="https://www.youtube.com/@@vinaoffice5846" title="https://www.youtube.com/@@vinaoffice5846" alt="https://www.youtube.com/@@vinaoffice5846" target="_blank"><span class="fab fa-youtube"></span></a>
+                            <a class="btn rounded-circle btn-facebook" href="https://www.facebook.com/vinaofficechair" title="https://www.facebook.com/vinaofficechair" alt="https://www.facebook.com/vinaofficechair" target="_blank"><span class="fab fa-facebook"></span></a>
+                            <a class="btn rounded-circle btn-zalo" href="https://zalo.me/0909994999" title="https://zalo.me/0909994999" alt="https://zalo.me/0909994999" target="_blank"><span class="iconify fs-26" data-icon="simple-icons:zalo"></span></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 d-none d-md-block">
+                <div class="footer-col">
+                    <a class="tt-xs tt-icon toggle-link">
+                        Youtube<i class="far fa-plus"></i>
+                    </a>
+                    <div class="list-toggle">
+                        <div class="thumb-res wide">
+                            <iframe src="https://www.youtube.com/embed/KTB3P3AzCOg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 d-none d-md-block">
+                <div class="footer-col">
+                    <a class="tt-xs tt-icon toggle-link">
+                        Bản đồ<i class="far fa-plus"></i>
+                    </a>
+                    <div class="list-toggle">
+                        <div class="thumb-res wide">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15678.811502423976!2d106.572822!3d10.757367!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752d3fa94285f7%3A0x695c28d26e25b306!2zQ8O0bmcgdHkgc-G6o24geHXhuqV0IGLDoG4gZ2jhur8gdsSDbiBwaMOybmcgVmluYW9mZmljZQ!5e0!3m2!1svi!2sus!4v1683088636185!5m2!1svi!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-md-none">
+                <div class="footer-col">
+                    <a class="tt-xs tt-icon toggle-link">
+                        Chi nhánh của chúng tôi<i class="far fa-plus"></i>
+                    </a>
+                    <div class="list-toggle">
+                        <div class="row list-location">
+                            <div class="col-12">
+                                <div class="block">
+                                    <div class="tt text-secondary">Xưởng Ghế</div>
+                                    <div class="picon">
+                                        <i class="far fa-map-marker-alt"></i>395 Đường Vườn
+                                        Thơm , Ấp 3 xã Bình Lợi, H. Bình Chánh , TPHCM
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="block">
+                                    <div class="tt text-secondary">Chi Nhánh Đà Nẵng</div>
+                                    <div class="picon">
+                                        <i class="far fa-map-marker-alt"></i>905/16 Ngô Quyền,
+                                        P.Sơn Trà, TP Đà Nẵng
+                                    </div>
+                                    <div class="picon">
+                                        <i class="far fa-phone fa-flip-horizontal"></i><a href="tel:0901.999.469"
+                                                                                          title=""
+                                                                                          alt=""
+                                                                                          target="_self">0901.999.469 (Anh Long)</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="block">
+                                    <div class="tt text-secondary">Chi Nhánh Cần Thơ</div>
+                                    <div class="picon">
+                                        <i class="far fa-map-marker-alt"></i>Chân cầu Bà Bộ -
+                                        Đường Võ Văn Kiệt , Bình Thủy , TP. Cần Thơ
+                                    </div>
+                                    <div class="picon">
+                                        <i class="far fa-phone fa-flip-horizontal"></i><a href="tel:0939.417.416"
+                                                                                          title=""
+                                                                                          alt=""
+                                                                                          target="_self">
+                                            0939.417.416 (Anh Hoan)
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="block">
+                                    <div class="tt text-secondary">
+                                        Chi Nhánh Kiên Giang
+                                    </div>
+                                    <div class="picon">
+                                        <i class="far fa-map-marker-alt"></i>Đường 3 tháng
+                                        2,P.An Hòa, Thành Phố Rạch Giá, Tỉnh Kiên Giang
+                                    </div>
+                                    <div class="picon">
+                                        <i class="far fa-phone fa-flip-horizontal"></i><a href="tel:0909.994.999"
+                                                                                          title=""
+                                                                                          alt=""
+                                                                                          target="_self">0909.994.999 (Anh Phúc)</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-location block-bg d-none d-md-block">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="block">
+                        <div class="tt text-secondary">Xưởng Ghế</div>
+                        <div class="picon">
+                            <i class="far fa-map-marker-alt"></i>395 Đường Vườn Thơm ,
+                            Ấp 3 xã Bình Lợi, H. Bình Chánh , TPHCM
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="block">
+                        <div class="tt text-secondary">Chi Nhánh Đà Nẵng</div>
+                        <div class="picon">
+                            <i class="far fa-map-marker-alt"></i>905/16 Ngô Quyền, P.Sơn
+                            Trà, TP Đà Nẵng
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-phone fa-flip-horizontal"></i><a href="tel:0901.999.469" title="" alt="" target="_self">0901.999.469 (Anh Long)</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="block">
+                        <div class="tt text-secondary">Chi Nhánh Cần Thơ</div>
+                        <div class="picon">
+                            <i class="far fa-map-marker-alt"></i>Chân cầu Bà Bộ - Đường
+                            Võ Văn Kiệt , Bình Thủy , TP. Cần Thơ
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-phone fa-flip-horizontal"></i><a href="tel:0939.417.416" title="" alt="" target="_self">
+                                0939.417.416 (Anh Hoan)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="block">
+                        <div class="tt text-secondary">Chi Nhánh Kiên Giang</div>
+                        <div class="picon">
+                            <i class="far fa-map-marker-alt"></i>Đường 3 tháng 2,P.An
+                            Hòa, Thành Phố Rạch Giá, Tỉnh Kiên Giang
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-phone fa-flip-horizontal"></i><a href="tel:0909.994.999" title="" alt="" target="_self">0909.994.999 (Anh Phúc)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyr">
+        <div class="container">
+            <div class="text-center">
+                © 2023 Vina Office.
+                <span class="text-nowrap">
+                    Powered by
+                    <a href="//bizmac.com"
+                       title="BizMaC, Thiết kế website chuyên nghiệp"
+                       target="_blank">BizMaC</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</footer>

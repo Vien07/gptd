@@ -1,0 +1,126 @@
+﻿@using VinaOfficeWebsite.Models.ViewModel;
+@using VinaOfficeWebsite.Repository;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section SliderBanner {
+    <div class="banner-lg block-bg banner-page"
+         style="background-image: url('/css/skin/banner/Banner.png')">
+        <div class="container d-flex align-items-center h-100">
+            <div class="text-banner">
+                <nav arial-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ" alt="Trang chủ" target="_self">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a href="#" title="Liên hệ" alt="Liên hệ" target="_self">Liên hệ</a>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="tt-md">Liên hệ</h1>
+            </div>
+        </div>
+    </div>
+}
+@section Meta{
+    @Html.Raw(ViewBag.Meta)
+}
+<main class="mainer">
+    <div class="block-bg">
+        <div class="container py-3 ">
+            <div class="row w-lg-75 mx-auto">
+                <div class="col-md-6 col-xl-5 mb-4 pl-xl-5 pt-md-6">
+                    <div class="tt-xs text-secondary">THÔNG TIN</div>
+                    <div>
+                        <div class="picon">
+                            <i class="far fa-map-marker-alt"></i>85 Trần Văn Giàu , Phường Tân Tạo A , Q.Bình Tân , TP.HCM
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-phone fa-flip-horizontal"></i><a href="tel:(+028) 62 660 139 - 62600367 - 625 38 800" title="" alt="" target="_self">(+028) 62 660 139 - 62600367 - 625 38 800</a>
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-fax"></i><a href="#" title="" alt="" target="_self">(+028) 626 00 367</a>
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-envelope"></i><a href="mailto:info@vinaoffice.com" title="" alt="" target="_self">info@vinaoffice.com</a>
+                        </div>
+                        <div class="picon">
+                            <i class="far fa-globe"></i><a href="www.vinaoffice.com" title="" alt="" target="_self">www.vinaoffice.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-7 mb-4">
+                    <h2 class="tt-md tt-icon">Form liên hệ</h2>
+                    <form id="frmContact" class="form-validate material-form">
+                        <div class="row gx-3">
+                            <div class="col-lg-6">
+                                <div class="form-group mb-3">
+                                    <input name="FullName" required class="form-control" type="text">
+                                    <label class="label-text">Họ tên</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-3">
+                                    <input name="Email" class="form-control" type="email" required>
+                                    <label class="label-text">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-3">
+                                    <input name="PhoneNumber" class="form-control" type="tel">
+                                    <label class="label-text">Điện thoại</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group mb-3">
+                                    <input name="Subject" class="form-control" type="text" required>
+                                    <label class="label-text">Tiêu đề</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group mb-3">
+                                    <textarea name="Content" class="form-control" rows="5" required></textarea>
+                                    <label class="label-text">Nội dung</label>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <div class="d-flex flex-wrap align-items-center justify-content-end">
+@*                                    <div class="g-recaptcha my-2 " data-sitekey="6LcbK98UAAAAALQI9rCCE3Vlm5LZtCt_Fdo7V4Wc"></div>
+*@                                    <button class="btn btn-primary px-4 ml-3" onclick="SendContact('frmContact', this)" type="button">Gửi liên hệ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block-bg py-3">
+        <div class="map thumb-res wide-sm rounded-3" id="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15678.811502423976!2d106.572822!3d10.757367!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752d3fa94285f7%3A0x695c28d26e25b306!2zQ8O0bmcgdHkgc-G6o24geHXhuqV0IGLDoG4gZ2jhur8gdsSDbiBwaMOybmcgVmluYW9mZmljZQ!5e0!3m2!1svi!2sus!4v1683088636185!5m2!1svi!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+    <div class="block-bg block-youtube">
+        <div class="container py-3 w-lg-75">
+            <div class="thumb-res youtube mb-3">
+                <iframe src="https://www.youtube.com/embed/KTB3P3AzCOg"></iframe>
+            </div>
+            <div class="thumb-res youtube mb-3">
+                <iframe src="https://www.youtube.com/embed/M5Id3MqO1RY"></iframe>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_PartialShared.cshtml" />
+</main>
+
+@section Scripts {
+    <script>
+        var imgs = $('img')
+        imgs.each(function (i, ele) {
+            if (!$(ele).attr('src').includes('vinaoffice.com')) {
+                $(ele).attr('src', 'https://vinaoffice.com' + $(ele).attr('src'))
+            }
+        })
+    </script>
+}

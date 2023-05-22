@@ -1,0 +1,61 @@
+﻿@using VinaOfficeWebsite.Models.ViewModel;
+@using VinaOfficeWebsite.Repository;
+@inject IProductRepository _product;
+@{
+    List<WareImageViewModel> wareImages = _product.GetWareImageList();
+    List<SupportViewModel> supports = _product.GeSupportList();
+}
+
+<div class="block-bg block-fixed">
+    <div class="container py-3 ">
+        <div class="text-uppercase text-center text-white tt fw-normal mb-0">MIỄN PHÍ GIAO HÀNG CHO ĐƠN HÀNG TRÊN 10 TRIỆU TRONG BÁN KÍNH 15KM</div>
+    </div>
+</div>
+<div class="block-bg py-3 ">
+    <div class="container ">
+        <h2 class="tt-xs mb-0">Kho chứa hàng Vina office</h2>
+    </div>
+    <div class="carousel-gallery-o">
+        <div class="carousel-gallery">
+            @foreach (var item in wareImages)
+            {
+                <div class="carousel-cell">
+                    <a class="thumb-res wide" alt="@item.Link" title="@item.Image" href="@item.Link" data-fancybox="gallery">
+                        <img class="fit-cover" alt="@item.Image" src="@item.Image">
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="block-bg banner-contact" style="background-image:url('/css/skin/theme/bg-fixed.png')">
+    <div class="container py-3">
+        <h2 class="tt-icon tt-md mb-0">Hỗ trợ trực tuyến</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 list-contact mt-3">
+            @foreach (var item in supports)
+            {
+                <div class="col">
+                    <div class="block">
+                        <div class="avatar">
+                            <img src="@item.Image" alt="@item.Image">
+                        </div>
+                        <div class="info">
+                            <div class="tt mb-0">@Html.Raw(item.Name)</div>
+                            <div class="telephone p-icon mb-2">
+                                <span class="far fa-phone"></span>
+                                <a alt="" title="" href="tel:@Html.Raw(item.Phone)">@Html.Raw(item.Phone)</a>
+                            </div>
+                            <span class="text mb-2">Hỗ trợ qua:</span>
+                            <div class="list-contact-social">
+                                <a title="@Html.Raw(item.Skype)" href="@Html.Raw(item.Skype)"><span class="fab fa-skype icon-social"></span></a>
+                                <a title="@Html.Raw(item.Viber)" href="viber://forward?text=@Html.Raw(item.Viber)"><span class="fab fa-viber icon-social"></span></a>
+                                <a title="@Html.Raw(item.Zalo)" href="https://zalo.me/@Html.Raw(item.Zalo)"><span class="iconify icon-social" data-icon="simple-icons:zalo"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

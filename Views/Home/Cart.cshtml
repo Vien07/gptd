@@ -1,0 +1,66 @@
+﻿@using VinaOfficeWebsite.Models.ViewModel;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Meta{
+    @Html.Raw(ViewBag.Meta)
+}
+
+@section SliderBanner {
+    <div class="banner-lg block-bg banner-page"
+         style="background-image: url('/css/skin/banner/Banner.png')">
+        <div class="container d-flex align-items-center h-100">
+            <div class="text-banner">
+                <nav arial-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ" alt="Trang chủ" target="_self">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a href="/gio-hang/" title="Giỏ hàng" alt="Giỏ hàng" target="_self">Giỏ hàng</a>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="tt-md">Giỏ hàng</h1>
+            </div>
+        </div>
+    </div>
+}
+
+<main class="mainer">
+    <div class="block-bg block-post">
+        <div class="container py-3">
+            <div class="list-cart-items">
+                <div class="cart-items cart-header">
+                    <div class="cart-info">Tên sản phẩm</div>
+                    <div class="cart-quanlity">Số lượng</div>
+                    <div class="cart-unit-price">Đơn giá</div>
+                    <div class="cart-total-price">Thành tiền</div>
+                </div>
+                <div class="items_a"></div>
+                <div class="cart-items cart-footer">
+                    <div class="total-products txt-desc">
+                        Tổng số sản phẩm: <span class="tt-xs fw-medium mb-0 totalQuantity">0</span>
+                    </div>
+                    <div class="total-price txt-desc">
+                        <div class="text-flex">Tổng thanh toán:<span class="price txt-price tt-xs mb-0 totalPrice"></span></div>
+                        <span class="txt-body text-center">(Giá trên chưa tính phí vận chuyển và VAT)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-center flex-wrap my-3 justify-content-end">
+                <a class="btn btn-secondary btn-buy" alt="Tiếp tục mua hàng" title="Tiếp tục mua hàng" href="/san-pham/">Tiếp tục mua hàng</a>
+                <a class="btn btn-primary btn-buy ml-2 my-2" alt="Đặt hàng" title="Đặt hàng" href="/dat-hang/">Đặt hàng</a>
+
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_PartialShared.cshtml" />
+</main>
+
+@section Scripts {
+    <script>
+        loadCart();
+    </script>
+}

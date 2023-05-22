@@ -1,0 +1,143 @@
+﻿@using VinaOfficeWebsite.Models.ViewModel;
+@using VinaOfficeWebsite.Repository;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    NewsViewModel data = ViewBag.Data;
+    List<ProductViewModel> latestProductList = ViewBag.LatestProductList;
+    List<NewsViewModel> relatedList = ViewBag.RelatedList;
+    var url = Context.Request.Host.Value;
+    var share = url + "/blogs/" + data.Slug + ".html";
+}
+@section SliderBanner {
+    <div class="banner-lg block-bg banner-page"
+         style="background-image: url('/css/skin/banner/Banner.png')">
+        <div class="container d-flex align-items-center h-100">
+            <div class="text-banner">
+                <nav arial-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ" alt="Trang chủ" target="_self">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/blogs/" title="Blogs" alt="Blogs" target="_self">Blogs</a>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="tt-md">@Html.Raw(data.Title)</h1>
+            </div>
+        </div>
+    </div>
+}
+@section Meta{
+    @Html.Raw(ViewBag.Meta)
+}
+
+<main class="mainer">
+    <div class="block-bg">
+        <div class="container py-3">
+            <div class="block-sidebar" data-wrapper>
+                <div class="mainbody mb-4 mb-md-0 order-md-2" data-mainbody>
+                    <div class="content-master mb-3">
+                        <h2 class="tt-lg">
+                            @Html.Raw(data.Title)
+                        </h2>
+                        <div class="desc txt-desc">
+                            @Html.Raw(data.Description)
+                        </div>
+                        <span class="border-desc"></span>
+                        <div class="content-post">
+                            <p><img src="@data.PicFull" alt="@data.PicFull" /></p>
+                            @Html.Raw(data.Content)
+                        </div>
+                        <div class="social-share social-stick">
+                            <a class="btn rounded-circle btn-twitter text-white fab fa-twitter"
+                               href="https://twitter.com/intent/tweet?original_referer=@Html.Raw(share)&amp;via=" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                            <a class="btn rounded-circle btn-facebook fab fa-facebook"
+                               href="https://www.facebook.com/sharer/sharer.php?u=@Html.Raw(share)" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                        </div>
+                    </div>
+                    <div class="block-comment mb-3 block-bg">
+                        <div class="tt-md mb-3 tt-icon">Bình luận</div>
+                        <div class="block-fb-comment">
+                            <div class="fb-comments" data-href="@share" data-width="100%" data-numposts="5" data-mobile></div>
+                        </div>
+                    </div>
+                    <div class="block-bg mb-3 block-other-post">
+                        <div class="tt-md tt-icon">Tin mới nhất</div>
+                        <div class="list-other-news row row-cols-1">
+                            @foreach(var item in relatedList)
+                            {
+                                <div class="col">
+                                    <div class="block">
+                                        <a class="absolute" alt="@Html.Raw(item.Title)" title="@Html.Raw(item.Title)" href="/blogs/@(Html.Raw(item.Slug)).html"></a>
+                                        <div class="info">
+                                            <div class="tt">@Html.Raw(item.Title)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar order-md-1" data-sidebar>
+                    <div data-stick data-width-fill>
+                        <div class="pane pane-list pane-list-products">
+                            <div class="tt-xs text-uppercase tt-icon">SẢN PHẨM MỚI</div>
+                            <div class="list-products">
+                                @foreach (var item in latestProductList)
+                                {
+                                    <div class="pane-list-item d-flex block">
+                                        <a class="absolute"
+                                           href="/chi-tiet-@(item.Slug).html"
+                                           title="@Html.Raw(item.Title)"
+                                           alt="@Html.Raw(item.Title)"
+                                           target="_self"></a>
+                                        <div class="thumb">
+                                            <img class="fit-cover"
+                                                 src="@Html.Raw(item.PicThumb)"
+                                                 alt="@Html.Raw(item.PicThumb)" />
+                                        </div>
+                                        <div class="info">
+                                            <div class="tt">
+                                                @Html.Raw(item.Title)
+                                            </div>
+                                            @if (item.Price != 0)
+                                            {
+                                                <div class="price">
+                                                    @Html.Raw(item.PriceString)<sup><u>đ</u></sup>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="price">
+                                                    <a href="/lien-he/" class="btn btn-primary btn-buy" alt="Liên hệ" title="Liên hệ">Liên hệ</a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                      @*  <div class="pane bannerqc">
+                            <a class="block" href="#" title="" alt="" target="_self">
+                                <img src="/css/skin/theme/bg-qc.png" alt="" />
+                            </a>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="~/Views/Shared/_PartialShared.cshtml" />
+</main>
+@section Scripts {
+    <script>
+        var imgs = $('img')
+        imgs.each(function (i, ele) {
+            if (!$(ele).attr('src').includes('vinaoffice.com')) {
+                $(ele).attr('src', 'https://vinaoffice.com' + $(ele).attr('src'))
+            }
+        })
+    </script>   
+}

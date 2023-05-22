@@ -1,0 +1,109 @@
+﻿@using VinaOfficeWebsite.Repository;
+@inject IAboutRepository _about
+@inject IProductRepository _product
+@{
+    var listAbout = _about.GetListTopMenu();
+    var listProductCate = _product.GetProductCate();
+}
+<header class="header" id="header">
+    <div class="container d-flex">
+        <button class="btn-menu fa fa-bars" id="menu-toggle" role="button"></button>
+        <a class="logo-full" href="/" title="Trang chủ" alt="Trang chủ">
+            <img class="logo" src="/css/skin/logo.png" alt="logo" />
+        </a>
+        <div class="form-search" id="form-search">
+            <div class="block-search">
+                <div class="tt-sm text-uppercase">TÌM KIẾM SẢN PHẨM</div>
+                <div class="form-group">
+                    <input id="_search" class="form-control" type="text" placeholder="Nhập mã hoặc tên sản phẩm" />
+                    <button onclick="" class="icon-submit" type="button">
+                        <span class="far fa-search"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="header-right d-flex">
+            <div class="header-right-item search">
+                <button class="icon-group d-flex align-items-center search-toggle" id="search-toggle" role="button" type="button">
+                    <span class="icon fa fa-search"></span>
+                </button>
+            </div>
+            <div class="header-right-item cart">
+                <a class="icon-group d-flex align-items-center" alt="Giỏ hàng" title="Giỏ hàng" href="/gio-hang/">
+                    <span class="icon icon-cart far fa-shopping-bag"></span>
+                    <span class="badge totalQuantity">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <nav class="navigate-dym" id="navigate">
+        <div class="menu">
+            <div class="menu-header">
+                <div class="tt-sm mb-0 text-uppercase text-primary">Menu</div>
+                <button class="btn-close" id="close-menu" type="button"></button>
+            </div>
+            <div class="menu-body">
+                <ul class="menu-slide">
+                    <li class="active d-lg-none">
+                        <a href="/" title="Trang chủ" alt="Trang chủ" target="_self">
+                            <span class="menu-icon far fa-home"></span>Trang chủ
+                        </a>
+                    </li>
+
+                    <li class="menu-mega">
+                        <a href="/san-pham/" title="Sản phẩm" alt="Sản phẩm">
+                            <span class="menu-icon far fa-boxes-stacked"></span>Sản phẩm
+                        </a>
+                        @if (listProductCate.Any())
+                        {
+                            <ul class="menu-slide-sub">
+                                @foreach (var item in listProductCate)
+                                {
+                                    <li>
+                                        <a href="/@Html.Raw(item.Slug)/" title="@Html.Raw(item.Name)" alt="@Html.Raw(item.Name)" target="_self">@Html.Raw(item.Name)</a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </li>
+
+                    @*@foreach (var item in listAbout)
+                    {
+                        <li>
+                            <a href="/tong-quan/@Html.Raw(item.Slug)/" title="@Html.Raw(item.Title)" alt="@Html.Raw(item.Title)" target="_self">
+                                <span class="menu-icon far fa-pen-ruler"></span>@Html.Raw(item.Title)
+                            </a>
+                        </li>
+                    }*@
+
+                    <li>
+                        <a href="" title="Thông tin" alt="Thông tin" target="_self">
+                            <span class="menu-icon far fa-building"></span>Thông tin
+                        </a>
+                        @if (listAbout.Any())
+                        {
+                            <ul class="menu-slide-sub">
+                                @foreach (var item in listAbout)
+                                {
+                                    <li>
+                                        <a href="/tong-quan/@Html.Raw(item.Slug)/" title="@Html.Raw(item.Title)" alt="@Html.Raw(item.Title)" target="_self">@Html.Raw(item.Title)</a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                    <li>
+                        <a href="/blogs/" title="BLOGS" alt="BLOGS" target="_self">
+                            <span class="menu-icon far fa-newspaper"></span>BLOGS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/lien-he/" title="Liên hệ" alt="Liên hệ" target="_self">
+                            <span class="menu-icon far fa-address-card"></span>Liên hệ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
