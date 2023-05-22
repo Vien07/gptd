@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Publish\cms</_PublishTargetUrl>
+    <History>True|2023-05-22T11:50:07.7476479Z;True|2023-05-22T18:46:12.8817455+07:00;True|2023-05-22T18:02:29.2614644+07:00;True|2023-05-22T17:59:18.8406493+07:00;True|2023-05-22T17:55:48.1309246+07:00;True|2023-05-22T17:50:00.5082022+07:00;True|2023-05-22T17:35:58.0320369+07:00;True|2023-05-22T17:28:10.6363435+07:00;True|2023-05-22T17:15:59.1686771+07:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

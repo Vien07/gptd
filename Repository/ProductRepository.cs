@@ -349,6 +349,7 @@ namespace VinaOfficeWebsite.Repository
                     Content = System.Net.WebUtility.HtmlDecode(x.ContentVn),
                     Price = x.Price,
                     CateId = x.CateId,
+                    Slug = _common.StringToSlug(x.TitleVn),
                     PriceString = "0",
                 }).FirstOrDefault();
 

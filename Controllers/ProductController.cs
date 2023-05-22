@@ -44,6 +44,10 @@ namespace VinaOfficeWebsite.Controllers
                 {
                     products = _product.GetProductList();
                 }
+                else if (slug == "webadmin")
+                {
+                    return Redirect("https://id.vinaoffice.com/webadmin/");
+                }
                 else
                 {
                     products = _product.GetProductListBySlug(slug, ref currentCate);

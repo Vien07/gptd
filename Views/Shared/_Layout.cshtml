@@ -4,6 +4,7 @@
 @inject IHttpContextAccessor _httpContextAccessor;
 @{
     string _host = _httpContextAccessor.HttpContext.Request.Scheme + "://" + _httpContextAccessor.HttpContext.Request.Host;
+    var googleTracker = _common.GetConfigValue("Google_Tracker");
 }
 <!DOCTYPE html>
 <html lang="vi">
@@ -12,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Required meta tags -->
     @RenderSection("Meta", required: false)
-
     <!-- Stylesheets -->
     <link rel="shortcut icon" href="@(_host)/favicon.ico" />
     <link asp-append-version="true" href="/css/library.min.css" rel="stylesheet" />
@@ -26,10 +26,17 @@
 
     <title>@Html.Raw("Nội Thất Văn Phòng - Bàn Ghế Văn Phòng - Vinaoffice")</title>
     @await RenderSectionAsync("Styles", required: false)
-
+    @Html.Raw(googleTracker)
 </head>
 
 <body>
+    <div id="fb-root"></div>
+    <script async
+            defer
+            crossorigin="anonymous"
+            src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&amp;version=v12.0&amp;appId=1539153889727055&amp;autoLogAppEvents=1"
+            nonce="qTkYIPYq"></script>
+
     <!-- preloader start -->
     <div class="preloader">
         <div class="preloader-in">
@@ -54,7 +61,7 @@
     <script src="/vendors/parsley/parsley.min.js" rel="stylesheet"></script>
     <script src="/vendors/toastr/toastr.min.js" rel="stylesheet"></script>
     <script typy="text/javascript">
-        new WOW().init();      
+        new WOW().init();
     </script>
 
     <script asp-append-version="true" src="/css/js/main.min.js"></script>
@@ -62,14 +69,6 @@
     <script asp-append-version="true" src="/js/custom.js" rel="stylesheet"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-
-    <div id="fb-root"></div>
-    <script async
-            defer
-            crossorigin="anonymous"
-            src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&amp;version=v12.0&amp;appId=1539153889727055&amp;autoLogAppEvents=1"
-            nonce="qTkYIPYq"></script>
-
     <!-- Load Facebook SDK for JavaScript -->
     <div id="fb-root"></div>
     <script>
