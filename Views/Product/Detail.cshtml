@@ -7,7 +7,7 @@
     List<ProductViewModel> latestProductList = ViewBag.LatestProductList;
     List<ProductViewModel> relatedList = ViewBag.RelatedList;
     var url = Context.Request.Host.Value;
-    var share = url + "/chi-tiet-" + data.Slug + ".html";
+    var share ="https://vinaoffice.com/chi-tiet-" + data.Slug + ".html";
 }
 @section SliderBanner {
     <div class="banner-lg block-bg banner-page"
@@ -44,7 +44,7 @@
                 <div class="mainbody mb-4 mb-md-0 order-md-2" data-mainbody>
                     <div class="row brief g-3 mt-1 mb-3">
                         <div class="col-12 col-md-6  col-lg-7 ">
-                            <a class="main-img mb-0" alt="@Html.Raw(data.PicFull)" title="@Html.Raw(data.PicFull)" href="@Html.Raw(data.PicFull)" data-fancybox="products-gallery">
+                            <a class="main-img mb-0" alt="@Html.Raw(data.Title)" title="@Html.Raw(data.Title)" href="@Html.Raw(data.PicFull)" data-fancybox="products-gallery">
                                 <img src="@Html.Raw(data.PicFull)" />
                             </a>
                         </div>
@@ -96,7 +96,7 @@
                     <div class="block-comment mb-3 block-bg">
                         <div class="tt-md mb-3 tt-icon">Bình luận</div>
                         <div class="block-fb-comment">
-                            <div class="fb-comments" data-href="https://@share" data-width="100%" data-numposts="5" data-mobile></div>
+                            <div class="fb-comments" data-href="@share" data-width="100%" data-numposts="5"></div>
                         </div>
                     </div>
                 </div>

@@ -17,5 +17,6 @@ namespace VinaOfficeWebsite.Repository
         string RemoveHtmlTag(string input);
         string GetMeta(MetaDto data);
         string GetConfigValue(string key);
+        string GetFacebookAppId();
     }
 }

@@ -5,5 +5,6 @@
         public string AdminUrl { get; set; }
         public string SiteUrl { get; set; }
         public bool Robots { get; set; }
+        public string FacebookAppId { get; set; }
     }
 }

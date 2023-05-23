@@ -78,7 +78,10 @@
                 @if (!string.IsNullOrEmpty(currentCate.Slug))
                 {
                     <h1 class="tt-md">@Html.Raw(currentCate.Title)</h1>
-
+                }
+                else
+                {
+                    <h1 class="tt-md">Sản phẩm</h1>
                 }
             </div>
         </div>

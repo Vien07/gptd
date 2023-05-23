@@ -18,7 +18,7 @@ namespace VinaOfficeWebsite.Controllers
             _product = product;
             _common = common;
         }
-        public IActionResult Index(string slug)
+        public IActionResult Index(string slug, int page)
         {
             try
             {
@@ -26,8 +26,6 @@ namespace VinaOfficeWebsite.Controllers
                 {
                     slug = slug.Replace("/", "");
                 }
-
-                int page = 0;
 
                 if (page < 1)
                 {

@@ -271,5 +271,9 @@ namespace VinaOfficeWebsite.Repository
                 return "";
             }
         }
+        public string GetFacebookAppId()
+        {
+            return _config.FacebookAppId;
+        }
     }
 }
