@@ -103,11 +103,11 @@ namespace VinaOfficeWebsite.Repository
             {
                 var dict = new Dictionary<ProductCateViewModel, List<ProductViewModel>>();
 
-                var cateList = _db.BzProductCates.Where(x => x.Enabled == 1).OrderByDescending(x => x.Order).Select(x => new ProductCateViewModel
+                var cateList = _db.BzProductCates.Where(x => x.Enabled == 1 && x.IsShowHome).OrderByDescending(x => x.Order).Select(x => new ProductCateViewModel
                 {
                     Id = x.CateId,
                     Title = x.NameVn,
-                }).Take(3).ToList();
+                }).ToList();
 
                 foreach (var item in cateList)
                 {
@@ -388,7 +388,7 @@ namespace VinaOfficeWebsite.Repository
                     Price = x.Price,
                     PriceString = "0",
                     PicThumb = _config.AdminUrl + "/images/product/" + x.PicThumb,
-                }).Take(12).ToList();
+                }).Take(13).ToList();
 
                 foreach (var item in model)
                 {

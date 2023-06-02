@@ -14,6 +14,7 @@ public partial class BzProductCate
     public long? Order { get; set; }
 
     public short? Enabled { get; set; }
+    public bool IsShowHome { get; set; }
 
     public string? DesVn { get; set; }
 

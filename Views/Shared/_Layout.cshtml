@@ -33,13 +33,6 @@
 <body>
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0&appId=@(facebookAppId)&autoLogAppEvents=1" nonce="vPfzEqqP"></script>
-    <!-- preloader start -->
-    <div class="preloader">
-        <div class="preloader-in">
-            <img src="/css/skin/logo.png" alt="Loading..." />
-        </div>
-    </div>
-    <!-- preloader end -->
     <div class="wrapper home-page" id="home-page">
         @await Html.PartialAsync("_Header.cshtml")
         @await RenderSectionAsync("SliderBanner", required: false)
