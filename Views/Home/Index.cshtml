@@ -56,11 +56,11 @@
                             <div class="thumb-res square">
                                 @if (i == 0)
                                 {
-                                    <img src="@Html.Raw(latestProductList[i].PicFull)" alt="@Html.Raw(latestProductList[i].Title)" title="@Html.Raw(latestProductList[i].Title)" />
+                                    <img class="lazy" data-src="@Html.Raw(latestProductList[i].PicFull)" alt="@Html.Raw(latestProductList[i].Title)" title="@Html.Raw(latestProductList[i].Title)" />
                                 }
                                 else
                                 {
-                                    <img src="@Html.Raw(latestProductList[i].PicThumb)" alt="@Html.Raw(latestProductList[i].Title)" title="@Html.Raw(latestProductList[i].Title)" />
+                                    <img class="lazy" data-src="@Html.Raw(latestProductList[i].PicThumb)" alt="@Html.Raw(latestProductList[i].Title)" title="@Html.Raw(latestProductList[i].Title)" />
                                 }
 
                                 @if (latestProductList[i].Price != 0)
@@ -160,7 +160,7 @@
                             <div class="block">
                                 <a class="absolute" alt="@Html.Raw(item.Name)" title="@Html.Raw(item.Name)" href="@Html.Raw(item.Slug)"></a>
                                 <div class="icon">
-                                    <img src="@Html.Raw(item.Image)" />
+                                    <img class="lazy" data-src="@Html.Raw(item.Image)" />
                                 </div>
                                 <div class="info">
                                     <div class="tt mb-0">@Html.Raw(item.Name)</div>
@@ -187,7 +187,7 @@
                                     @* <div class="list-badge">
                             <div class="badge new">Mới</div>
                             </div>*@
-                                    <img src="@Html.Raw(ele.PicThumb)" alt="@Html.Raw(ele.PicThumb)" title="@Html.Raw(ele.PicThumb)" />
+                                    <img class="lazy" data-src="@Html.Raw(ele.PicThumb)" alt="@Html.Raw(ele.PicThumb)" title="@Html.Raw(ele.PicThumb)" />
                                     @if (ele.Price != 0)
                                     {
                                         <div class="text-hover">
@@ -253,7 +253,7 @@
                         <div class="block">
                             <a class="absolute" alt="@Html.Raw(item.Title)" title="@Html.Raw(item.Title)" href="/blogs/@(Html.Raw(item.Slug)).html"></a>
                             <div class="thumb-res wide-lg">
-                                <img class="fit-cover" src="@Html.Raw(item.PicThumb)" />
+                                <img class="fit-cover lazy" data-src="@Html.Raw(item.PicThumb)" />
                             </div>
                             <div class="info">
                                 <svg viewBox="0 0 1920 77" fill="none" xmlns="http://www.w3.org/2000/svg">

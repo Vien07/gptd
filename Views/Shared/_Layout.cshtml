@@ -46,11 +46,14 @@
     <script src="/css/plugins/fancybox.umd.js"></script>
     <script src="/css/plugins/wow.min.js"></script>
     <script src="/css/plugins/iconify.min.js"></script>
-
+    <script src="/js/jquery.lazy.min.js"></script>
     <script src="/vendors/parsley/parsley.min.js" rel="stylesheet"></script>
     <script src="/vendors/toastr/toastr.min.js" rel="stylesheet"></script>
     <script typy="text/javascript">
-        new WOW().init();
+        $(function () {
+            $('.lazy').Lazy();
+            new WOW().init();
+        });
     </script>
 
     <script asp-append-version="true" src="/css/js/main.min.js"></script>
