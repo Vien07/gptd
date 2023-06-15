@@ -56,7 +56,7 @@ namespace VinaOfficeWebsite.Controllers
             {
                 string host = Request.Scheme + "://" + Request.Host;
                 var result = "";
-                string DisallowRobots = "User-agent: * \nAllow: /\nSitemap: " + host + "/sitemap.xml\nDisallow: "+ host + "/admin.vinaoffice.com\nDisallow: /*_escaped_fragment_";
+                string DisallowRobots = "User-agent: * \nAllow: /\nSitemap: " + host + "/sitemap.xml\nDisallow: https://id.vinaoffice.com/webadmin";
                 if (_config.Robots == true)
                 {
                     result = DisallowRobots;
