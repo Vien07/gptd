@@ -68,6 +68,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 var options = new RewriteOptions()
+       .AddRewrite("rss.xml", "Sitemap/RssXml", skipRemainingRules: true)
        .AddRewrite("sitemap.xml", "Sitemap/SitemapXml", skipRemainingRules: true)
        .AddRewrite("robots.txt", "Sitemap/RobotServices", skipRemainingRules: true)
        .AddRewrite("Home/SaveOrder", "Home/SaveOrder", skipRemainingRules: true)

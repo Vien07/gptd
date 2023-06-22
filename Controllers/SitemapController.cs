@@ -8,6 +8,8 @@ using System.Xml;
 using Microsoft.Extensions.Options;
 using VinaOfficeWebsite.Database;
 using SimpleMvcSitemap;
+using VinaOfficeWebsite.Models.ViewModel;
+using MimeKit.Text;
 
 namespace VinaOfficeWebsite.Controllers
 {
@@ -22,6 +24,82 @@ namespace VinaOfficeWebsite.Controllers
             _common = common;
             _config = options.Value;
             _db = db;
+        }
+
+        public IActionResult RssXml()
+        {
+            var feed = BuildXmlFeed();
+            return Content(feed, "text/xml");
+        }
+
+        public string BuildXmlFeed()
+        {
+            string host = Request.Scheme + "://" + Request.Host;
+
+            StringWriter parent = new StringWriter();
+            using (XmlTextWriter writer = new XmlTextWriter(parent))
+            {
+                writer.WriteStartElement("rss");
+                writer.WriteAttributeString("xmlns", "g", null, "http://base.google.com/ns/1.0");
+                writer.WriteAttributeString("version", "2.0");
+
+                writer.WriteComment("Powered by BizMaC - www.bizmac.com");
+                writer.WriteStartElement("chanel");
+                writer.WriteElementString("title", "Danh sách sản phẩm");
+                writer.WriteElementString("link", host + "/san-pham/");
+                writer.WriteElementString("description", "Chuyên thiết kế, sản xuất các sản phẩm nội thất văn phòng, bàn ghế văn phòng, bàn ghế nhà hàng khách sạn, trường học theo yêu cầu với đội ngũ chuyên nghiệp");
+
+
+                var model = _db.BzProducts.Where(x => x.Enabled == 1).OrderByDescending(x => x.Order).Select(x => new ProductViewModel
+                {
+                    Id = x.ProductId,
+                    Title = x.TitleVn,
+                    Description = System.Net.WebUtility.HtmlDecode(x.DesVn),
+                    Price = x.Price,
+                    PriceString = "0",
+                    Slug = _common.StringToSlug(x.TitleVn),
+                    PicThumb = _config.AdminUrl + "/images/product/" + x.PicThumb,
+                }).ToList();
+
+                foreach (var item in model)
+                {
+                    if (item.Price == null)
+                    {
+                        item.Price = 0;
+                        item.PriceString = "0";
+                    }
+                    else
+                    {
+                        item.PriceString = _common.ConvertFormatMoney(item.Price);
+                    }
+
+                    writer.WriteStartElement("item");
+                    writer.WriteElementString("g", "id", null, item.Id.ToString());
+                    writer.WriteElementString("g", "title", null, item.Title);
+                    writer.WriteElementString("g", "description", null, item.Description);
+                    writer.WriteElementString("g", "link", null, host + "/chi-tiet-" + item.Slug + ".html");
+                    writer.WriteElementString("g", "image_link", null, item.PicThumb);
+                    writer.WriteElementString("g", "availability", null, "còn hàng");
+                    if (item.Price != 0)
+                    {
+                        writer.WriteElementString("g", "price", null, item.Price + " VND");
+
+                    }
+                    else
+                    {
+                        writer.WriteElementString("g", "price", null, "0 VND");
+
+                    }
+                    writer.WriteElementString("g", "condition", null, "mới");
+                    writer.WriteElementString("g", "identifier_exists", null, "no");
+                    writer.WriteEndElement();
+                }
+
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+            }
+
+            return parent.ToString();
         }
 
         public async Task<IActionResult> SitemapXml()
