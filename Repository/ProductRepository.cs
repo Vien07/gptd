@@ -404,6 +404,7 @@ namespace VinaOfficeWebsite.Repository
                     item.Slug = _common.StringToSlug(item.Title);
                 }
                 model = model.Where(x => x.Slug != slug).ToList();
+                model = model.Take(12).ToList();
                 return model;
             }
             catch

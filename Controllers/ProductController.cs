@@ -1,5 +1,4 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using VinaOfficeWebsite.Constants;
 using VinaOfficeWebsite.Dto;
@@ -51,7 +50,7 @@ namespace VinaOfficeWebsite.Controllers
                     products = _product.GetProductListBySlug(slug, ref currentCate);
                 }
 
-                var pageLimit = 24;
+                var pageLimit = 32;
                 PagedList<ProductViewModel> dataPaging = new PagedList<ProductViewModel>(products, page, pageLimit);
                 ViewBag.Data = dataPaging.ToList();
                 ViewBag.PageTotal = dataPaging.PageCount;

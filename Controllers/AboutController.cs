@@ -1,5 +1,4 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using VinaOfficeWebsite.Dto;
 using VinaOfficeWebsite.Models.ViewModel;
 using VinaOfficeWebsite.Repository;
