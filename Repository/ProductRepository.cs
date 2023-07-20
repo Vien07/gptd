@@ -354,7 +354,7 @@ namespace VinaOfficeWebsite.Repository
                 }).FirstOrDefault();
 
 
-                var cate = _db.BzProductCates.Where(x => x.CateId == x.CateId).FirstOrDefault();
+                var cate = _db.BzProductCates.Where(x => x.CateId == model.CateId).FirstOrDefault();
                 model.CateName = cate.NameVn;
                 model.CateSlug = _common.StringToSlug(cate.NameVn);
 
