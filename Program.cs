@@ -3,6 +3,7 @@ using VinaOfficeWebsite.Repository;
 using Microsoft.AspNetCore.Rewrite;
 using VinaOfficeWebsite.Models.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration; // allows both to access and to set up the config
@@ -64,8 +65,14 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @".well-known")),
+    RequestPath = new PathString("/.well-known"),
+    ServeUnknownFileTypes = true
+});
 
 var options = new RewriteOptions()
        .AddRewrite("rss.xml", "Sitemap/RssXml", skipRemainingRules: true)

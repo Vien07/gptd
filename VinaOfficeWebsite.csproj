@@ -24,6 +24,11 @@
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+	<!--<ItemGroup>
+	  <Content Include=".well-known\pki-validation\179A7149095E1D25D914CCF0CB2DD3C4.txt" />
+	  <Content Include=".well-known\pki-validation\55C3C7C8B89DCE99576E41C47FF29DE2.txt" />
+	  <Content Include=".well-known\pki-validation\5B24B112A5BA141CC5530745372EDFAF.txt" />
+	</ItemGroup>-->
 	<ItemGroup>
 		<PackageReference Include="MailKit" Version="3.6.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.16" />
