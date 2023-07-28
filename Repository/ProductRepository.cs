@@ -368,6 +368,17 @@ namespace VinaOfficeWebsite.Repository
                     model.PriceString = _common.ConvertFormatMoney(model.Price);
                 }
 
+                model.Pictures = new List<ProductPicture>();
+                var pictures = _db.BzProductPictures.Where(x => x.ProductId == model.Id).OrderByDescending(x => x.Order).ToList();
+                foreach (var ele in pictures)
+                {
+                    model.Pictures.Add(new ProductPicture
+                    {
+                        PicThumb = _config.AdminUrl + "/images/product/" + ele.PicThumb,
+                        PicFull = _config.AdminUrl + "/images/product/" + ele.PicFull,
+                    });
+                }
+
                 return model;
             }
             catch

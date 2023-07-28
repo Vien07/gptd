@@ -7,7 +7,7 @@
     List<ProductViewModel> latestProductList = ViewBag.LatestProductList;
     List<ProductViewModel> relatedList = ViewBag.RelatedList;
     var url = Context.Request.Host.Value;
-    var share ="https://vinaoffice.com/chi-tiet-" + data.Slug + ".html";
+    var share = "https://vinaoffice.com/chi-tiet-" + data.Slug + ".html";
 }
 @section SliderBanner {
     <div class="banner-lg block-bg banner-page"
@@ -81,6 +81,13 @@
                             <div class="content-ellips clearfix" id="products-desc">
                                 <p><strong>Thông tin chi tiết</strong></p>
                                 @Html.Raw(data.Content)
+
+                                @foreach (var item in data.Pictures)
+                                {
+                                    <a class="main-img mb-0" alt="@Html.Raw(item.PicFull)" title="@Html.Raw(item.PicFull)" href="@Html.Raw(item.PicFull)" data-fancybox="products-gallery">
+                                        <img src="@Html.Raw(item.PicFull)" />
+                                    </a>
+                                }
                             </div>
                             <div class="text-center">
                                 <button class="btn btn-toggle-content hidden"

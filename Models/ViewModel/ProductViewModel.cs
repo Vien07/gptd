@@ -1,5 +1,10 @@
 ﻿namespace VinaOfficeWebsite.Models.ViewModel
 {
+    public class ProductPicture
+    {
+        public string PicThumb { get; set; }
+        public string PicFull { get; set; }
+    }
     public class ProductViewModel
     {
         public long Id { get; set; }
@@ -14,5 +19,6 @@
         public string CateSlug { get; set; }
         public string PriceString { get; set; }
         public string Content { get; set; }
+        public List<ProductPicture> Pictures { get; set; }
     }
 }
