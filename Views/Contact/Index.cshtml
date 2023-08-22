@@ -115,10 +115,11 @@
 </main>
 
 @section Scripts {
+    <script src="/css/plugins/fancybox.umd.js"></script>
     <script>
         var imgs = $('img')
         imgs.each(function (i, ele) {
-            if (!$(ele).attr('src').includes('vinaoffice.com')) {
+            if ($(ele).attr('src') && !$(ele).attr('src').includes('vinaoffice.com')) {
                 $(ele).attr('src', 'https://vinaoffice.com' + $(ele).attr('src'))
             }
         })

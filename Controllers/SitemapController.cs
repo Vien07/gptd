@@ -42,9 +42,7 @@ namespace VinaOfficeWebsite.Controllers
                 writer.WriteStartElement("rss");
                 writer.WriteAttributeString("xmlns", "g", null, "http://base.google.com/ns/1.0");
                 writer.WriteAttributeString("version", "2.0");
-
-                writer.WriteComment("Powered by BizMaC - www.bizmac.com");
-                writer.WriteStartElement("chanel");
+                writer.WriteStartElement("channel");
                 writer.WriteElementString("title", "Danh sách sản phẩm");
                 writer.WriteElementString("link", host + "/san-pham/");
                 writer.WriteElementString("description", "Chuyên thiết kế, sản xuất các sản phẩm nội thất văn phòng, bàn ghế văn phòng, bàn ghế nhà hàng khách sạn, trường học theo yêu cầu với đội ngũ chuyên nghiệp");
@@ -79,7 +77,7 @@ namespace VinaOfficeWebsite.Controllers
                     writer.WriteElementString("g", "description", null, item.Description);
                     writer.WriteElementString("g", "link", null, host + "/chi-tiet-" + item.Slug + ".html");
                     writer.WriteElementString("g", "image_link", null, item.PicThumb);
-                    writer.WriteElementString("g", "availability", null, "còn hàng");
+                    writer.WriteElementString("g", "availability", null, "in_stock");
                     if (item.Price != 0)
                     {
                         writer.WriteElementString("g", "price", null, item.Price + " VND");
@@ -90,7 +88,7 @@ namespace VinaOfficeWebsite.Controllers
                         writer.WriteElementString("g", "price", null, "0 VND");
 
                     }
-                    writer.WriteElementString("g", "condition", null, "mới");
+                    writer.WriteElementString("g", "condition", null, "new");
                     writer.WriteElementString("g", "identifier_exists", null, "no");
                     writer.WriteEndElement();
                 }
@@ -115,7 +113,7 @@ namespace VinaOfficeWebsite.Controllers
             var products = _db.BzProducts.Where(p => p.Enabled == 1).ToList();
             foreach (var item in products)
             {
-                nodes.Add(new SitemapNode(host + "/chi-tiet-" + _common.StringToSlug(item.TitleVn) + ".html") { Priority = 0.5M });
+                nodes.Add(new SitemapNode(host + "/chi-tiet-" + _common.StringToSlug(item.TitleVn) + ".html") { Priority = 0.8M });
             }
 
             var news = _db.BzLists.Where(p => p.Enabled == 1).ToList();

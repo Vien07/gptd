@@ -18,15 +18,13 @@
     <section class="home-slider-o">
         <div class="home-slider">
             <div class="img-slide">
-                <img src="/css/skin/banner/banner-header.png" alt="" />
+                <img src="/css/skin/banner/banner-header.jpg" alt="banner" />
                 <div class="container absolute d-flex justify-content-center">
                     <div class="textbox text-left wow col zoomIn">
                         <div class="text-center">
                             <div class="tt-icon mb-2"></div>
                         </div>
-                        <h1 class="tt-lg text-uppercase">
-                            VINAOFFICE.COM
-                        </h1>
+                        <h1 class="tt-lg text-uppercase">VINAOFFICE.COM</h1>
                         <div class="desc text-center">
                             Vinaoffice là một trong những thương hiệu nội thất văn phòng
                             hàng đầu tại Việt Nam. Với hơn 10 năm kinh nghiệm trong ngành
@@ -56,11 +54,11 @@
                             <div class="thumb-res square">
                                 @if (i == 0)
                                 {
-                                    <img class="lazy" data-src="@Html.Raw(latestProductList[i].PicFull)" alt="@Html.Raw(latestProductList[i].Title)" title="@Html.Raw(latestProductList[i].Title)" />
+                                    <img src="@Html.Raw(latestProductList[i].PicFull)" alt="@Html.Raw(latestProductList[i].Title)" title="@Html.Raw(latestProductList[i].Title)" />
                                 }
                                 else
                                 {
-                                    <img class="lazy" data-src="@Html.Raw(latestProductList[i].PicThumb)" alt="@Html.Raw(latestProductList[i].Title)" title="@Html.Raw(latestProductList[i].Title)" />
+                                    <img src="@Html.Raw(latestProductList[i].PicThumb)" alt="@Html.Raw(latestProductList[i].Title)" title="@Html.Raw(latestProductList[i].Title)" />
                                 }
 
                                 @if (latestProductList[i].Price != 0)
@@ -150,7 +148,7 @@
     </div>
     </div>*@
 
-    <div class="block-bg banner-lg" style="background-image: url('/css/skin/theme/bg-category.png')">
+    <div class="block-bg banner-lg" style="background-image: url('/css/skin/theme/bg-category.jpg')">
         <div class="container py-4">
             <div class="carousel-category-o">
                 <div class="carousel-category">

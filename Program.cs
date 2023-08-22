@@ -4,17 +4,34 @@ using Microsoft.AspNetCore.Rewrite;
 using VinaOfficeWebsite.Models.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration; // allows both to access and to set up the config
 IWebHostEnvironment environment = builder.Environment;
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.AllowSynchronousIO = true;
+    options.AutomaticAuthentication = true;
+
+});
+
+builder.Services.Configure<IISOptions>(options =>
+{
+    options.ForwardClientCertificate = false;
+});
+
+
+builder.Services.AddControllersWithViews();
+
+//builder.Services.AddResponseCaching();
+
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddDbContext<BzVinaofficeContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
 
-
-builder.Services.AddDbContext<BzVinaofficeContext>();
 builder.Services.AddScoped<ICommonRepository, CommonRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
@@ -24,32 +41,38 @@ builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.Configure<SystemConfig>(
     builder.Configuration.GetSection("SystemConfig"));
 
-builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+//builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 
-
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);//We set Time here 
+    options.IdleTimeout = TimeSpan.FromHours(48);//We set Time here 
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+    options.CheckConsentNeeded = context => false;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+
+
 var app = builder.Build();
 // Adding Database Context to Web Application Builder Services Collection.
 // This should be performed before building Web Application.
 
 //handle 404 page
-app.Use(async (ctx, next) =>
-{
-    await next();
-    if (ctx.Response.StatusCode == 404)
-    {
-        ctx.Request.Path = "/Error/Page404";
-        await next();
-    }
-});
+//app.Use(async (ctx, next) =>
+//{
+//    await next();
+//    if (ctx.Response.StatusCode == 404)
+//    {
+//        ctx.Request.Path = "/Error/Page404";
+//        await next();
+//    }
+//});
 
 app.UseSession();
 
@@ -67,12 +90,19 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-app.UseStaticFiles(new StaticFileOptions
+try
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @".well-known")),
-    RequestPath = new PathString("/.well-known"),
-    ServeUnknownFileTypes = true
-});
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @".well-known")),
+        RequestPath = new PathString("/.well-known"),
+        ServeUnknownFileTypes = true
+    });
+}
+catch
+{
+
+}
 
 var options = new RewriteOptions()
        .AddRewrite("rss.xml", "Sitemap/RssXml", skipRemainingRules: true)
@@ -105,9 +135,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();
 

@@ -23,7 +23,6 @@ public class HomeController : Controller
         _news = news;
         _common = common;
     }
-
     public IActionResult Index()
     {
         try

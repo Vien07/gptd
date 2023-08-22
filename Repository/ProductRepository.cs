@@ -109,19 +109,24 @@ namespace VinaOfficeWebsite.Repository
                     Title = x.NameVn,
                 }).ToList();
 
+                var cateListId = cateList.Select(x => x.Id).ToList();
+
+                var productList = _db.BzProducts.Where(x => x.Enabled == 1 && x.CateId != null && cateListId.Contains(x.CateId.Value)).OrderByDescending(x => x.Order).Select(x => new ProductViewModel
+                {
+                    Id = x.ProductId,
+                    CateId = x.CateId,
+                    Title = x.TitleVn,
+                    Description = x.DesVn,
+                    Price = x.Price,
+                    PriceString = "0",
+                    PicThumb = _config.AdminUrl + "/images/product/" + x.PicThumb,
+                }).ToList();
+
                 foreach (var item in cateList)
                 {
-                    var productList = _db.BzProducts.Where(x => x.Enabled == 1 && x.CateId == item.Id).OrderByDescending(x => x.Order).Select(x => new ProductViewModel
-                    {
-                        Id = x.ProductId,
-                        Title = x.TitleVn,
-                        Description = x.DesVn,
-                        Price = x.Price,
-                        PriceString = "0",
-                        PicThumb = _config.AdminUrl + "/images/product/" + x.PicThumb,
-                    }).Take(8).ToList();
+                    var products = productList.Where(x => x.CateId == item.Id).Take(8).ToList();
 
-                    foreach (var ele in productList)
+                    foreach (var ele in products)
                     {
                         if (ele.Price == null)
                         {
@@ -135,7 +140,7 @@ namespace VinaOfficeWebsite.Repository
 
                         ele.Slug = _common.StringToSlug(ele.Title);
                     }
-                    dict.Add(item, productList);
+                    dict.Add(item, products);
                 }
                 return dict;
             }
